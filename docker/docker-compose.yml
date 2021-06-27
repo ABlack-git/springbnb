@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  springbnb-sb:
+    image: postgres
+    container_name: springbnb-db
+    ports:
+    - "8182:8080"
+    - "8183:5432"
+    volumes:
+    - "springbnb-db:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: springbnb
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: springbnb
+  keycloak:
+    image: "jboss/keycloak:latest"
+    container_name: keycloak 
+    ports:
+      - "8181:8080"
+    environment:
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: admin
+        KEYCLOAK_IMPORT: /tmp/keycloak-config.json
+    volumes:
+    - "${PWD}/keycloak-config.json:/tmp/keycloak-config.json"
+
+volumes:
+  springbnb-db:

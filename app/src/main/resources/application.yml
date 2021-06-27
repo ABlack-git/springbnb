@@ -1,0 +1,31 @@
+server:
+  port: 8180
+spring:
+  application:
+    name: springbnb
+  datasource:
+    url: jdbc:postgresql://localhost:8183/springbnb
+    username: springbnb
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: none
+  flyway:
+    locations: "classpath:migrations"
+    enabled: true
+
+keycloak:
+  auth-server-url: http://localhost:8181/auth
+  realm: springbnb
+  resource: springbnb
+  credentials:
+    secret: f5a3b5dd-d402-411b-99bd-25a300b7bfac
+  use-resource-role-mappings: true
+  bearer-only: true
+  principal-attribute: preferred_username
+
+#logging:
+#  level:
+#    root: debug
